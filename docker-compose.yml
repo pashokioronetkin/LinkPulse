@@ -4,9 +4,23 @@ services:
     image: postgres:16.4 
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: my_pass
-      PGDATA: /data/postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - ./postgres-data:/data/postgres
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_go
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
