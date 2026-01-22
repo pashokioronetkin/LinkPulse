@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-type Middleware func(http.Handler) http.Handler
+type Middleware func(http.Handler) http.Handler // Define a type for middleware functions
 
 func Chain(middlewares ...Middleware) Middleware {
 	return func(next http.Handler) http.Handler {

@@ -10,14 +10,14 @@ func CORS(next http.Handler) http.Handler {
 			return
 		}
 		header := w.Header()
-		header.Set("Access-Control-Allow-Origin", origin)
-		header.Set("Access-Control-Allow-Credentials", "true")
+		header.Set("Access-Control-Allow-Origin", origin)      // Allow all origins
+		header.Set("Access-Control-Allow-Credentials", "true") // Allow cookies to be sent
 
 		if r.Method == http.MethodOptions {
 			header.Set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, PATCH")
 			header.Set("Access-Control-Allow-Headers", "authorization, content-type, content-length")
 			header.Set("Access-Control-Max-Age", "86400")
-		}
+		} // Add more headers as needed
 
 		next.ServeHTTP(w, r)
 	})
