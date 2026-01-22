@@ -77,8 +77,8 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 
 func (handler *LinkHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		idString := r.PathValue("id")
-		id, err := strconv.ParseUint(idString, 10, 32)
+		idString := r.PathValue("id")                  // PathValue - это метод из пакета req, который извлекает значение параметра из URL по имени параметра.
+		id, err := strconv.ParseUint(idString, 10, 32) // ParseUint - это функция из пакета strconv, которая преобразует строку в беззнаковое целое число.
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
